@@ -37,4 +37,20 @@ public class UserService {
             throw new RuntimeException(e);
         }
     }
+
+    public Optional<User> GetUserById(Long id) {
+        try {
+            Optional<User> userId = userRepo.findById(id);
+            if (userId.isPresent()){
+                System.out.print("ID: " + id + " Found!");
+                System.out.print(userId);
+
+            }
+
+            return userId;
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

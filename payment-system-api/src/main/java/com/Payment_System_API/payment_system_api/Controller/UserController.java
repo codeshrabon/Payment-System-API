@@ -25,20 +25,41 @@ public class UserController {
     // add data from postman
     @PostMapping("/admin/addUser")
     public ResponseEntity<?> addUser (@RequestBody User user){
-        Optional<User> createNewUser = userService.AddNewUser(user);
-        System.out.print("User Added");
-        //System.out.print(createNewUser);
-        return new ResponseEntity<>(createNewUser, HttpStatus.CREATED);
+        try {
+            Optional<User> createNewUser = userService.AddNewUser(user);
+            System.out.print("User Added");
+            //System.out.print(createNewUser);
+            return new ResponseEntity<>(createNewUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // get All the user as admin
     @GetMapping("/admin/allUser")
     public ResponseEntity<List<User>> allUser (){
-        List<User> GetAllUser = userService.getAllUser();
-        System.out.print("Found All User");
+        try {
+            List<User> GetAllUser = userService.getAllUser();
+            System.out.print("Found All User");
 
-        return new ResponseEntity<>(GetAllUser, HttpStatus.OK);
+            return new ResponseEntity<>(GetAllUser, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+
+    //get a user by its id
+    @GetMapping("/admin/getuser/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id){
+        try {
+            Optional<User> getUserById = userService.GetUserById(id);
+            System.out.print("User Looking for " + id +" ID");
+            System.out.println(id + " ID: " + getUserById);
+            return new ResponseEntity<>(getUserById, HttpStatus.FOUND);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
