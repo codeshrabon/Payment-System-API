@@ -1,9 +1,12 @@
 package com.Payment_System_API.payment_system_api.Service;
 
 
+import com.Payment_System_API.payment_system_api.Model.User;
 import com.Payment_System_API.payment_system_api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -11,6 +14,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
+    public UserService(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
-
+    public Optional<User> AddNewUser(User user) {
+        User saveUser = userRepo.save(user);
+        System.out.println(saveUser);
+        return Optional.of(saveUser);
+    }
 }
