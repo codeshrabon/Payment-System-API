@@ -6,6 +6,7 @@ import com.Payment_System_API.payment_system_api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,8 +20,21 @@ public class UserService {
     }
 
     public Optional<User> AddNewUser(User user) {
-        User saveUser = userRepo.save(user);
-        System.out.println(saveUser);
-        return Optional.of(saveUser);
+        try {
+            User saveUser = userRepo.save(user);
+            System.out.println(saveUser);
+            return Optional.of(saveUser);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<User> getAllUser() {
+        try {
+
+            return userRepo.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

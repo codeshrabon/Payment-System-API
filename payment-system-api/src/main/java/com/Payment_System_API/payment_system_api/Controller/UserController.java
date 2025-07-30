@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +29,16 @@ public class UserController {
         System.out.print("User Added");
         //System.out.print(createNewUser);
         return new ResponseEntity<>(createNewUser, HttpStatus.CREATED);
+    }
+
+    // get All the user as admin
+    @GetMapping("/admin/allUser")
+    public ResponseEntity<List<User>> allUser (){
+        List<User> GetAllUser = userService.getAllUser();
+        System.out.print("Found All User");
+
+        return new ResponseEntity<>(GetAllUser, HttpStatus.OK);
+
     }
 
 
