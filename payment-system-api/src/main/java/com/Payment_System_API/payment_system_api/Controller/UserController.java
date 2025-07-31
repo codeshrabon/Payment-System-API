@@ -51,12 +51,18 @@ public class UserController {
 
     //get a user by its id
     @GetMapping("/admin/getuser/{id}")
-    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id){
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
         try {
-            Optional<User> getUserById = userService.GetUserById(id);
             System.out.print("User Looking for " + id +" ID");
+
+            /*Optional<User> getUserById = userService.GetUserById(id);
+
             System.out.println(id + " ID: " + getUserById);
-            return new ResponseEntity<>(getUserById, HttpStatus.FOUND);
+            return new ResponseEntity<>(getUserById, HttpStatus.FOUND);*/
+
+            return userService.GetUserById(id)
+                    .map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
