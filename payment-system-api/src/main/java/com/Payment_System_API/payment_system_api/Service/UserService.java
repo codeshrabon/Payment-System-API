@@ -1,6 +1,8 @@
 package com.Payment_System_API.payment_system_api.Service;
 
 
+import com.Payment_System_API.payment_system_api.DTO.UserRequestDTO;
+import com.Payment_System_API.payment_system_api.DTO.UserResponseDTO;
 import com.Payment_System_API.payment_system_api.Model.User;
 import com.Payment_System_API.payment_system_api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
+    // adding new data
     public Optional<User> AddNewUser(User user) {
         try {
             User saveUser = userRepo.save(user);

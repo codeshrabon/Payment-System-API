@@ -1,6 +1,8 @@
 package com.Payment_System_API.payment_system_api.Controller;
 
 
+import com.Payment_System_API.payment_system_api.DTO.UserRequestDTO;
+import com.Payment_System_API.payment_system_api.DTO.UserResponseDTO;
 import com.Payment_System_API.payment_system_api.Model.User;
 import com.Payment_System_API.payment_system_api.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,14 @@ public class UserController {
 
     // add data from postman
     @PostMapping("/admin/addUser")
-    public ResponseEntity<?> addUser (@RequestBody User user){
+    public ResponseEntity<Optional<User>> addUser (@RequestBody User user){
         try {
-            Optional<User> createNewUser = userService.AddNewUser(user);
-            System.out.print("User Added");
+            Optional<User> UserAdded = userService.AddNewUser(user);
+
+
+            //System.out.print("User Added");
             //System.out.print(createNewUser);
-            return new ResponseEntity<>(createNewUser, HttpStatus.CREATED);
+            return new ResponseEntity<>(UserAdded, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
