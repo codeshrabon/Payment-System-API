@@ -71,11 +71,25 @@ public class UserService {
 
         try {
             User saveUser = userRepo.save(user);
-            return new UserResponseDTO();
+            return mapToResponseDTO(saveUser);
         }
         catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private UserResponseDTO mapToResponseDTO(User user) {
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setId(user.getId());
+        userResponseDTO.setName(user.getName());
+        userResponseDTO.setEmail(user.getEmail());
+        userResponseDTO.setPhoneNumber(user.getPhoneNumber());
+        userResponseDTO.setAddress(user.getAddress());
+        userResponseDTO.setRole(user.getRole());
+        userResponseDTO.setCreatedAt(user.getCreatedAt());
+        userResponseDTO.setStatus(user.isStatus());
+        userResponseDTO.setUpdateAt(user.getUpdateAt());
+        return userResponseDTO;
     }
 }
