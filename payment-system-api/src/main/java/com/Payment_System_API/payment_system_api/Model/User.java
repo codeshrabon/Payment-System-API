@@ -31,7 +31,7 @@ public class User {
       private UserRole role;  //ADMIN or CUSTOMER enums
 
 
-    public UserRole getRole() {
+    /*public UserRole getRole() {
         return role;
     }
 
@@ -101,5 +101,5 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
 }

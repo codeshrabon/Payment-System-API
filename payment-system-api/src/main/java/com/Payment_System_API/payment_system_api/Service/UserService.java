@@ -8,6 +8,7 @@ import com.Payment_System_API.payment_system_api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +56,26 @@ public class UserService {
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public UserResponseDTO AddNewCustomer(UserRequestDTO userRequestDTO) {
+        User user = new User();
+        user.setName(userRequestDTO.getName());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setPhoneNumber(userRequestDTO.getPhoneNumber());
+        user.setAddress(userRequestDTO.getAddress());
+        user.setStatus(true);
+        user.setRole(userRequestDTO.getRole());
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdateAt(LocalDateTime.now());
+
+        try {
+            User saveUser = userRepo.save(user);
+            return new UserResponseDTO();
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

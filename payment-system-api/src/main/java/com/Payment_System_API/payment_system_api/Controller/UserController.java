@@ -29,10 +29,6 @@ public class UserController {
     public ResponseEntity<Optional<User>> addUser (@RequestBody User user){
         try {
             Optional<User> UserAdded = userService.AddNewUser(user);
-
-
-            //System.out.print("User Added");
-            //System.out.print(createNewUser);
             return new ResponseEntity<>(UserAdded, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -71,6 +67,14 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    //manually adding user with DTO
+    @PostMapping ("admin/addNewCustomer")
+    public ResponseEntity<UserResponseDTO> addNewCustomer(@RequestBody UserRequestDTO userRequestDTO){
+        UserResponseDTO responseDTO = userService.AddNewCustomer(userRequestDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
+
 
 
 }
