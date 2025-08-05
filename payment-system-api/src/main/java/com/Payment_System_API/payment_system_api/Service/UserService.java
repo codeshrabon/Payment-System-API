@@ -79,6 +79,7 @@ public class UserService {
 
     }
 
+    // this map for user input data and edit data
     private UserResponseDTO mapToResponseDTO(User user) {
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.setId(user.getId());
@@ -91,5 +92,20 @@ public class UserService {
         userResponseDTO.setStatus(user.isStatus());
         userResponseDTO.setUpdateAt(user.getUpdateAt());
         return userResponseDTO;
+    }
+
+    public UserResponseDTO UpdateExistingData(Long id, UserRequestDTO userRequestDTO) {
+
+        User user = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+        user.setName(userRequestDTO.getName());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setPhoneNumber(userRequestDTO.getPhoneNumber());
+        user.setAddress(userRequestDTO.getAddress());
+        user.setStatus(userRequestDTO.isStatus());
+        user.setRole(userRequestDTO.getRole());
+
+        user = userRepo.save(user);
+
+        return mapToResponseDTO(user);
     }
 }

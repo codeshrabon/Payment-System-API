@@ -76,5 +76,11 @@ public class UserController {
     }
 
 
+    //updating existing data with DTO
+    @PutMapping("admin/editCustomerData/{id}")
+    public ResponseEntity<UserResponseDTO> editCustomerData(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+        UserResponseDTO userResponseDTO = userService.UpdateExistingData(id, userRequestDTO);
+        return ResponseEntity.ok(userResponseDTO);
+    }
 
 }
